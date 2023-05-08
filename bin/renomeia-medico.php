@@ -1,16 +1,19 @@
 <?php
 
-use Bruna\Hospital\Entidades\Especialidade;
+use Bruna\Hospital\Entidades\Medico;
 use Bruna\Hospital\ConexaoSql\EntidadeDeConexao;
 
 require_once __DIR__ .  '/../vendor/autoload.php';
 
 $gerenciamentoDeEntidade = EntidadeDeConexao::gerenciamentoDeConexao();
-$especialidadeRepositorio = $gerenciamentoDeEntidade->getRepository(Especialidade::class);
+$medicoRepositorio = $gerenciamentoDeEntidade->getRepository(Medico::class);
 
-$medico = $especialidadeRepositorio->find($argv[1]);
+$medico = $medicoRepositorio->find($argv[1]);
 
-$medico->name = $argv[2];
-var_dump($medico);
+if ($medico) {
+    $medico->name = $argv[2];
 
-$gerenciamentoDeEntidade->flush(); 
+    $gerenciamentoDeEntidade->flush();
+} else {
+    echo 'id de Médico não encontrado' . PHP_EOL;
+}
