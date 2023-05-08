@@ -11,7 +11,9 @@ class RepositorioDoHospital extends EntityRepository
     {
         return $this->createQueryBuilder('medico')
             ->addSelect('especialidade')
+            ->addSelect('paciente')
             ->leftJoin('medico.especialidade', 'especialidade')
+            ->leftJoin('medico.paciente', 'paciente')
             ->getQuery()
             ->getResult();
     }

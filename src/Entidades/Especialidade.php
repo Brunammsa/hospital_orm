@@ -17,7 +17,7 @@ class Especialidade
     public int $id;
 
     #[ManyToMany(targetEntity: Medico::class, inversedBy: 'especialidade')]
-    private Collection $medico;
+    public Collection $medico;
 
     public function __construct(
         #[Column]
@@ -26,6 +26,9 @@ class Especialidade
         $this->medico = new ArrayCollection();
     }
 
+    /**
+     * @return Collection<Medico>
+     */
     public function medico(): Collection
     {
         return $this->medico;
