@@ -24,6 +24,9 @@ class Medico
     #[OneToMany(targetEntity:Paciente::class, mappedBy: 'medico', cascade: ['persist'])]
     private Collection $paciente;
 
+    #[OneToMany(targetEntity:Marcacao::class, mappedBy: 'medico', cascade: ['persist'])]
+    private Collection $marcacao;
+
     public function __construct(
         #[Column]
         public string $name
@@ -45,6 +48,11 @@ class Medico
         return $this->paciente;
     }
 
+    public function marcacao(): Collection
+    {
+        return $this->marcacao;
+    }
+
     public function addEspecialidade(Especialidade $especialidade): void
     {
         if ($this->especialidade->contains($especialidade)) {
@@ -58,6 +66,12 @@ class Medico
     public function addPaciente(Paciente $paciente): void
     {
         $this->paciente->add($paciente);
-        $paciente->SetMedico($this);
+        $paciente->setMedico($this);
+    }
+
+    public function addMarcacao(Marcacao $marcacao): void
+    {
+        $this->marcacao->add($marcacao);
+        $marcacao->setMedico($this);
     }
 }

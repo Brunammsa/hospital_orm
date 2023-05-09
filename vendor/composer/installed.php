@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'bruna/hospital',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'fa0ce744172d3eadb66bc6c8b8ce2fcbb390004e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'bruna/hospital' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'fa0ce744172d3eadb66bc6c8b8ce2fcbb390004e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
