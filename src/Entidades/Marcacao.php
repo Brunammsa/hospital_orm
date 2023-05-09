@@ -2,7 +2,7 @@
 
 namespace Bruna\Hospital\Entidades;
 
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -15,17 +15,17 @@ class Marcacao
     #[Id, GeneratedValue, Column]
     public int $id;
 
-    #[ManyToOne(targetEntity:Medico::class, inversedBy: 'marcacao')]
-    public readonly Medico $medico;
+    #[ManyToOne(targetEntity:Paciente::class, inversedBy: 'marcacao')]
+    public readonly Paciente $paciente;
 
     public function __construct(
         #[Column]
-        public DateTime $date
+        public DateTimeImmutable $date
     ) {
     }
 
-    public function setMedico(Medico $medico): void
+    public function setPaciente(Paciente $paciente): void
     {
-        $this->medico = $medico;
+        $this->paciente = $paciente;
     }
 }

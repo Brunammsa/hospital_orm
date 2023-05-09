@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToMany;
 
 #[Entity(RepositorioPacienteMedico::class)]
 class Paciente
@@ -19,6 +20,9 @@ class Paciente
 
     #[ManyToMany(targetEntity: Medico::class, inversedBy: 'paciente')]
     public Collection $medico;
+
+    #[OneToMany(targetEntity:Marcacao::class, mappedBy: 'paciente', cascade: ['persist'])]
+    public Collection $marcacao;
 
     public function __construct(
         #[Column]
@@ -38,5 +42,16 @@ class Paciente
         }
         $this->medico->add($medico);
         $medico->addPaciente($this);
+    }
+
+    public function setMedico(Medico $medico):void
+    {
+        $this->medico = $medico;
+    }
+
+    public function addMarcacao(Marcacao $marcacao): void
+    {
+        $this->marcacao->add($marcacao);
+        $marcacao->setPaciente($this);
     }
 }

@@ -2,6 +2,8 @@
 
 use Bruna\Hospital\ConexaoSql\EntidadeDeConexao;
 use Bruna\Hospital\Entidades\Marcacao;
+use Bruna\Hospital\Entidades\Paciente;
+
 
 require_once __DIR__ . './../vendor/autoload.php';
 

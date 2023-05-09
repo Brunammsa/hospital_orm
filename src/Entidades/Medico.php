@@ -29,7 +29,10 @@ class Medico
 
     public function __construct(
         #[Column]
-        public string $name
+        public string $name,
+        
+        #[Column]
+        public string $sobrenome
     ) {
         $this->especialidade = new ArrayCollection();
         $this->paciente = new ArrayCollection();
