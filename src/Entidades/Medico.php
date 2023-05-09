@@ -2,7 +2,7 @@
 
 namespace Bruna\Hospital\Entidades;
 
-use Bruna\Hospital\Repositorio\RepositorioDoHospital;
+use Bruna\Hospital\Repositorio\RepositorioMedicoEspecialidade;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 
-#[Entity(RepositorioDoHospital::class)]
+#[Entity(RepositorioMedicoEspecialidade::class)]
 class Medico
 {
     #[Id, GeneratedValue, Column]
@@ -21,10 +21,10 @@ class Medico
     #[ManyToMany(targetEntity: Especialidade::class, mappedBy: 'medico')]
     private Collection $especialidade;
 
-    #[OneToMany(targetEntity:Paciente::class, mappedBy: 'medico', cascade: ['persist'])]
+    #[ManyToMany(targetEntity: Paciente::class, mappedBy: 'medico')]
     private Collection $paciente;
 
-    #[OneToMany(targetEntity:Marcacao::class, mappedBy: 'medico', cascade: ['persist'])]
+    #[OneToMany(targetEntity: Marcacao::class, mappedBy: 'medico', cascade: ['persist'])]
     private Collection $marcacao;
 
     public function __construct(
@@ -35,9 +35,6 @@ class Medico
         $this->paciente = new ArrayCollection();
     }
 
-    /**
-     * @return Collection<Especialidade>
-     */
     public function especialidade(): Collection
     {
         return $this->especialidade;
@@ -65,8 +62,11 @@ class Medico
 
     public function addPaciente(Paciente $paciente): void
     {
+        if ($this->paciente->contains($paciente)) {
+            return;
+        }
         $this->paciente->add($paciente);
-        $paciente->setMedico($this);
+        $paciente->marcaMedico($this);
     }
 
     public function addMarcacao(Marcacao $marcacao): void

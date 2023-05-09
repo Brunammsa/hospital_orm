@@ -2,29 +2,41 @@
 
 namespace Bruna\Hospital\Entidades;
 
+use Bruna\Hospital\Repositorio\RepositorioPacienteMedico;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\ManyToMany;
 
-#[Entity]
+#[Entity(RepositorioPacienteMedico::class)]
 class Paciente
 {
     #[Id, GeneratedValue, Column]
     public int $id;
 
-    #[ManyToOne(targetEntity:Medico::class, inversedBy: 'paciente')]
-    public readonly Medico $medico;
+    #[ManyToMany(targetEntity: Medico::class, inversedBy: 'paciente')]
+    public Collection $medico;
 
     public function __construct(
         #[Column]
         public readonly string $name
-    ){
+    ) {
+        $this->medico = new ArrayCollection();
     }
 
-    public function setMedico(Medico $medico): void
+    public function medico(): Collection
     {
-        $this->medico = $medico;
+        return $this->medico;
+    }
+    public function marcaMedico(Medico $medico): void
+    {
+        if ($this->medico->contains($medico)) {
+            return;
+        }
+        $this->medico->add($medico);
+        $medico->addPaciente($this);
     }
 }
