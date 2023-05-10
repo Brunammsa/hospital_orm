@@ -17,14 +17,20 @@ final class Version20230509124725 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        /*
+        Criando tabela manualmente
+        
         $tabela = $schema->createTable('modelo');
         $tabela->addColumn('id', 'integer')->setAutoincrement(true);
         $tabela->addColumn('coluna_modelo', 'string');
         $tabela->setPrimaryKey(['id']);
+        */
     }
 
     public function down(Schema $schema): void
     {
+        /*
         $schema->dropTable('modelo');
+        */
     }
 }

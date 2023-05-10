@@ -29,6 +29,7 @@ class Paciente
         public readonly string $name
     ) {
         $this->medico = new ArrayCollection();
+        $this->marcacao = new ArrayCollection();
     }
 
     public function medico(): Collection
@@ -47,11 +48,5 @@ class Paciente
     public function setMedico(Medico $medico):void
     {
         $this->medico = $medico;
-    }
-
-    public function addMarcacao(Marcacao $marcacao): void
-    {
-        $this->marcacao->add($marcacao);
-        $marcacao->setPaciente($this);
     }
 }
