@@ -64,15 +64,14 @@ while (!$validacao) {
             }
             echo PHP_EOL . PHP_EOL;
         }
-    } elseif (strtoupper($respostaMenu) == 'MARCAÇÃO') {
-        /**
-         * @var Marcacao[] $listaDeMarcacoes
-         */
-        foreach ($repositorioMarcacao as $marcacao) {
-            echo $marcacao;
-            
+    } elseif ($respostaMenu == 'marcação') {
+            foreach ($listaDeMarcacoes as $marcacao) {
+                echo "Marcação: " . $marcacao->date->format('Y-m-d H:i');
+                echo " - Médico: " . $marcacao->medico->name;
+                echo " - Paciente: " . $marcacao->paciente->name;
+            }
+
         }
-    }
 
     $encerrar = trim(readline('Para encerrar digite SAIR ou enter para continuar: '));
     if (strtoupper($encerrar) == 'SAIR') {
