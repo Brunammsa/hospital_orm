@@ -35,7 +35,7 @@ while (!$validacao) {
          */
         foreach ($listaDeMedicos as $medico) {
             echo "Médico(a): $medico->name";
-            
+
             if ($medico->especialidade()->count() > 0) {
                 echo ' - Especialidade(s): ';
                 echo implode(
@@ -64,14 +64,15 @@ while (!$validacao) {
             }
             echo PHP_EOL . PHP_EOL;
         }
-    } elseif ($respostaMenu == 'marcação') {
-            foreach ($listaDeMarcacoes as $marcacao) {
-                echo "Marcação: " . $marcacao->date->format('Y-m-d H:i');
-                echo " - Médico: " . $marcacao->medico->name;
-                echo " - Paciente: " . $marcacao->paciente->name;
-            }
-
+    } elseif (strtoupper($respostaMenu) == 'MARCAÇÃO') {
+        foreach ($listaDeMarcacoes as $marcacao) {
+            echo "Marcação: " . $marcacao->date->format('Y-m-d H:i');
+            echo " - Médico: " . $marcacao->medico->name;
+            echo " - Paciente: " . $marcacao->paciente->name;
         }
+        echo PHP_EOL . PHP_EOL;
+
+    }
 
     $encerrar = trim(readline('Para encerrar digite SAIR ou enter para continuar: '));
     if (strtoupper($encerrar) == 'SAIR') {
