@@ -69,9 +69,8 @@ while (!$validacao) {
             echo "Marcação: " . $marcacao->date->format('Y-m-d H:i');
             echo " - Médico: " . $marcacao->medico->name;
             echo " - Paciente: " . $marcacao->paciente->name;
-            
-            echo PHP_EOL . PHP_EOL;
 
+            echo PHP_EOL . PHP_EOL;
         }
 
     }
