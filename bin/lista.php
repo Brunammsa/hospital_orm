@@ -25,7 +25,7 @@ while (!$validacao) {
     echo "Dentre as opções abaixo, digite a que deseja listar:\n
     - Para médicos/especialidades digite ESPECIALIDADE
     - Para médicos/pacientes, digite PACIENTE
-    - Para marcações, digite MARCAÇÃO" . PHP_EOL;
+    - Para marcações, digite MARCACAO" . PHP_EOL;
 
     $respostaMenu = trim(readline(''));
 
@@ -64,13 +64,15 @@ while (!$validacao) {
             }
             echo PHP_EOL . PHP_EOL;
         }
-    } elseif (strtoupper($respostaMenu) == 'MARCAÇÃO') {
+    } elseif (strtoupper($respostaMenu) == 'MARCACAO') {
         foreach ($listaDeMarcacoes as $marcacao) {
             echo "Marcação: " . $marcacao->date->format('Y-m-d H:i');
             echo " - Médico: " . $marcacao->medico->name;
             echo " - Paciente: " . $marcacao->paciente->name;
+            
+            echo PHP_EOL . PHP_EOL;
+
         }
-        echo PHP_EOL . PHP_EOL;
 
     }
 
